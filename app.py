@@ -381,21 +381,7 @@ def access():
 #     if request.method == 'POST':
 #         return redirect('http://localhost:3000')
         
-    
 
-        
-    
-    
-
-    
-    
-    
-        
-
-
-    
-          
-    
     
 if __name__=="__main__":
     
