@@ -380,6 +380,20 @@ def access():
 # def chat():
 #     if request.method == 'POST':
 #         return redirect('http://localhost:3000')
+
+
+@app.route('/probono',methods=['POST','GET'])
+def probono():
+    # if request.method == 'POST':
+    #     return redirect('http://localhost:3000')
+    return
+
+@app.route('/postcase',methods=['POST','GET'])
+def postacase():
+    # if request.method == 'POST':
+    #     return redirect('http://localhost:3000')
+    return
+
         
 
     
