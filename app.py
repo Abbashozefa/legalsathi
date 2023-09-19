@@ -394,6 +394,12 @@ def postacase():
     #     return redirect('http://localhost:3000')
     return
 
+@app.route('/payments',methods=['POST','GET'])
+def payment():
+    # if request.method == 'POST':
+    #     return redirect('http://localhost:3000')
+    return
+
         
 
     
