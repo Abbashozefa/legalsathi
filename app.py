@@ -400,6 +400,113 @@ def payment():
     #     return redirect('http://localhost:3000')
     return
 
+
+
+
+@app.route("/lawyerslist", methods=["POST","GET"])
+def lawyerslistoffline():
+    data=db.child("LegalSathi").child("token").get().val()
+    sortedDict = sorted(data.items(), key=lambda x:x[1])
+    name =[]
+    token=[]
+    for i in range(len(sortedDict)-1,-1,-1):
+          f = sortedDict[i]
+          name.append(f[0])
+          token.append(f[1])
+    items=[]
+    if request.method == 'POST':
+        rate = int(request.form['rate'])
+        speciality= request.form['speciality']
+        location= request.form['location']
+        print(rate,speciality,location)
+        if(rate != "none" and speciality != "none" and location != "none" ):
+            
+    
+            
+            for i in range(len(sortedDict)):
+                spec=db.child("LegalSathi").child("lawyers").child(name[i]).child("speciality").get().val()
+                loc=db.child("LegalSathi").child("lawyers").child(name[i]).child("address").get().val()
+                exp=db.child("LegalSathi").child("lawyers").child(name[i]).child("rate").get().val()
+                print(spec,loc,exp)
+                if(spec == speciality and loc == location and  exp <= rate):
+                    items.append([name[i],exp,loc])
+            return render_template('lawyerslist.html',items=items)
+        else:
+            if(rate != "none" and speciality != "none"):
+                 
+            
+                for i in range(len(sortedDict)):
+                    spec=db.child("LegalSathi").child("lawyers").child(name[i]).child("speciality").get().val()
+                    loc=db.child("LegalSathi").child("lawyers").child(name[i]).child("address").get().val()
+                    exp=db.child("LegalSathi").child("lawyers").child(name[i]).child("rate").get().val()
+                    print(spec,loc,exp)
+                    if(spec == speciality and  exp <= rate):
+                        items.append([name[i],exp,loc])
+                return render_template('lawyerslist.html',items=items)
+            elif(speciality != "none" and location != "none"):
+                 
+            
+                for i in range(len(sortedDict)):
+                    spec=db.child("LegalSathi").child("lawyers").child(name[i]).child("speciality").get().val()
+                    loc=db.child("LegalSathi").child("lawyers").child(name[i]).child("address").get().val()
+                    exp=db.child("LegalSathi").child("lawyers").child(name[i]).child("rate").get().val()
+                    print(spec,loc,exp)
+                    if(spec == speciality and  loc == location):
+                        items.append([name[i],exp,loc])
+                return render_template('lawyerslist.html',items=items)
+            elif(rate != "none" and location != "none"):
+                  
+            
+                for i in range(len(sortedDict)):
+                    spec=db.child("LegalSathi").child("lawyers").child(name[i]).child("speciality").get().val()
+                    loc=db.child("LegalSathi").child("lawyers").child(name[i]).child("address").get().val()
+                    exp=db.child("LegalSathi").child("lawyers").child(name[i]).child("rate").get().val()
+                    print(spec,loc,exp)
+                    if(exp <= rate and  loc == location):
+                        items.append([name[i],exp,loc])
+                return render_template('lawyerslist.html',items=items)
+            elif(rate != "none"):
+                 
+            
+                for i in range(len(sortedDict)):
+                    spec=db.child("LegalSathi").child("lawyers").child(name[i]).child("speciality").get().val()
+                    loc=db.child("LegalSathi").child("lawyers").child(name[i]).child("address").get().val()
+                    exp=db.child("LegalSathi").child("lawyers").child(name[i]).child("rate").get().val()
+                    
+                    print(spec,loc,exp)
+                    if(exp <= rate ):
+                        items.append([name[i],exp,loc])
+                return render_template('lawyerslist.html',items=items)
+            elif(speciality != "none"):
+                  
+            
+                for i in range(len(sortedDict)):
+                    spec=db.child("LegalSathi").child("lawyers").child(name[i]).child("speciality").get().val()
+                    loc=db.child("LegalSathi").child("lawyers").child(name[i]).child("address").get().val()
+                    exp=db.child("LegalSathi").child("lawyers").child(name[i]).child("rate").get().val()
+                    print(spec,loc,exp)
+                    if(spec == speciality ):
+                        items.append([name[i],exp,loc])
+                return render_template('lawyerslist.html',items=items)
+            else:
+                 
+            
+                for i in range(len(sortedDict)):
+                    spec=db.child("LegalSathi").child("lawyers").child(name[i]).child("speciality").get().val()
+                    loc=db.child("LegalSathi").child("lawyers").child(name[i]).child("address").get().val()
+                    exp=db.child("LegalSathi").child("lawyers").child(name[i]).child("rate").get().val()
+                    print(spec,loc,exp)
+                    if(loc == location ):
+                        items.append([name[i],exp,loc])
+                return render_template('lawyerslist.html',items=items)
+    else:
+        for i in range(len(sortedDict)):
+                spec=db.child("LegalSathi").child("lawyers").child(name[i]).child("speciality").get().val()
+                loc=db.child("LegalSathi").child("lawyers").child(name[i]).child("address").get().val()
+                exp=db.child("LegalSathi").child("lawyers").child(name[i]).child("rate").get().val()
+                items.append([name[i],exp,loc])
+        return render_template('lawyerslist.html',items=items)
+
         
 
     
